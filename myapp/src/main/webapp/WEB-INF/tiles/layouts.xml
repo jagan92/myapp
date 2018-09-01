@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="defaultTemplate">
+		<put-attribute name="title" value="Admin LTE" />
+		<put-attribute name="body" value="" />
+<!-- 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" /> -->
+	</definition>
+	<definition name="dashboardTemplate" template="/WEB-INF/tiles/dashboard-template-new.jsp"
+		extends="defaultTemplate">
+		<put-attribute name="customJS" value="" />
+		<put-attribute name="customCss" value="" />
+	</definition>
+	<definition name="authTemplate" template="/WEB-INF/tiles/auth-template.jsp" extends="defaultTemplate">
+		<put-attribute name="customJS" value="" />
+	</definition>
+	<definition name="ajaxTemplate" template="/WEB-INF/tiles/ajax-template.jsp">
+		<put-attribute name="body" value="" />
+	</definition>
+	<definition name="errorTemplate" template="/WEB-INF/tiles/error-template.jsp"
+		extends="defaultTemplate">
+		<put-attribute name="header" value="/WEB-INF/views/error/header.jsp" />
+	</definition>
+
+</tiles-definitions>
