@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 2 | Top Navigation</title>
+<title>:: My Application ::</title>
 <base
 	href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 <!-- Tell the browser to be responsive to screen width -->
@@ -40,7 +40,7 @@
 			<nav class="navbar navbar-static-top">
 				<div class="container">
 					<div class="navbar-header">
-						<a href="../../index2.html" class="navbar-brand"><b>Admin</b>LTE</a>
+						<a href="dashboard.htm" class="navbar-brand"><b>My Application</b></a>
 						<button type="button" class="navbar-toggle collapsed"
 							data-toggle="collapse" data-target="#navbar-collapse">
 							<i class="fa fa-bars"></i>
@@ -51,27 +51,25 @@
 					<div class="collapse navbar-collapse pull-left"
 						id="navbar-collapse">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Link <span
-									class="sr-only">(current)</span></a></li>
-							<li><a href="#">Link</a></li>
+<!-- 							<li class="active"><a href="#">Link <span -->
+<!-- 									class="sr-only">(current)</span></a></li> -->
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+								data-toggle="dropdown">Create <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">Action</a></li>
-									<li><a href="#">Another action</a></li>
-									<li><a href="#">Something else here</a></li>
+									<li><a href="addUser.htm"><i class="fa fa-user"></i> User</a></li>
 									<li class="divider"></li>
-									<li><a href="#">Separated link</a></li>
+									<li><a href="addDepartment.htm"><i class="fa fa-cog"></i> Department</a></li>
 									<li class="divider"></li>
-									<li><a href="#">One more separated link</a></li>
+									<li><a href="addCourse.htm"><i class="fa fa-cogs"></i> Course</a></li>
 								</ul></li>
+								<li><a href="dashboard.htm">Attendance</a></li>
 						</ul>
-						<form class="navbar-form navbar-left" role="search">
-							<div class="form-group">
-								<input type="text" class="form-control" id="navbar-search-input"
-									placeholder="Search">
-							</div>
-						</form>
+<!-- 						<form class="navbar-form navbar-left" role="search"> -->
+<!-- 							<div class="form-group"> -->
+<!-- 								<input type="text" class="form-control" id="navbar-search-input" -->
+<!-- 									placeholder="Search"> -->
+<!-- 							</div> -->
+<!-- 						</form> -->
 					</div>
 					<!-- /.navbar-collapse -->
 					<!-- Navbar Right Menu -->
@@ -92,7 +90,7 @@
 												<!-- start message --> <a href="#">
 													<div class="pull-left">
 														<!-- User Image -->
-														<img src="../../dist/img/user2-160x160.jpg"
+														<img src="resources/adminlte/dist/img/avatar5.png"
 															class="img-circle" alt="User Image">
 													</div> <!-- Message title and timestamp -->
 													<h4>
@@ -169,41 +167,40 @@
 							<li class="dropdown user user-menu">
 								<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"> <!-- The user image in the navbar-->
-									<img src="../../dist/img/user2-160x160.jpg" class="user-image"
+									<img src="resources/adminlte/dist/img/avatar5.png" class="user-image"
 									alt="User Image"> <!-- hidden-xs hides the username on small devices so only the image appears. -->
-									<span class="hidden-xs">Alexander Pierce</span>
+									<span class="hidden-xs">User Name</span>
 							</a>
 								<ul class="dropdown-menu">
 									<!-- The user image in the menu -->
 									<li class="user-header"><img
-										src="../../dist/img/user2-160x160.jpg" class="img-circle"
+										src="resources/adminlte/dist/img/avatar5.png" class="img-circle"
 										alt="User Image">
 
 										<p>
-											Alexander Pierce - Web Developer <small>Member since
-												Nov. 2012</small>
+											User Name
 										</p></li>
 									<!-- Menu Body -->
-									<li class="user-body">
-										<div class="row">
-											<div class="col-xs-4 text-center">
-												<a href="#">Followers</a>
-											</div>
-											<div class="col-xs-4 text-center">
-												<a href="#">Sales</a>
-											</div>
-											<div class="col-xs-4 text-center">
-												<a href="#">Friends</a>
-											</div>
-										</div> <!-- /.row -->
-									</li>
+<!-- 									<li class="user-body"> -->
+<!-- 										<div class="row"> -->
+<!-- 											<div class="col-xs-4 text-center"> -->
+<!-- 												<a href="#">Followers</a> -->
+<!-- 											</div> -->
+<!-- 											<div class="col-xs-4 text-center"> -->
+<!-- 												<a href="#">Sales</a> -->
+<!-- 											</div> -->
+<!-- 											<div class="col-xs-4 text-center"> -->
+<!-- 												<a href="#">Friends</a> -->
+<!-- 											</div> -->
+<!-- 										</div> /.row -->
+<!-- 									</li> -->
 									<!-- Menu Footer-->
 									<li class="user-footer">
 										<div class="pull-left">
-											<a href="#" class="btn btn-default btn-flat">Profile</a>
+											<a href="dashboard.htm" class="btn btn-default btn-flat">Profile</a>
 										</div>
 										<div class="pull-right">
-											<a href="#" class="btn btn-default btn-flat">Sign out</a>
+											<a href="j_spring_security_logout" class="btn btn-default btn-flat">Sign out</a>
 										</div>
 									</li>
 								</ul>
@@ -218,17 +215,15 @@
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<!-- Main content -->
-			<section class="content">
-				<tiles:insertAttribute name="body" />
-			</section>
+			<tiles:insertAttribute name="body" />
 		</div>
 		<!-- /.content-wrapper -->
 		<!-- Starts Web Page Footer -->
 		<footer class="main-footer">
 			<div class="pull-right hidden-xs">
-				<b>Version</b> 2.3.8
+				<b>Version</b> 0.0.1
 			</div>
-			<strong> Copyright (c) 2018 Techwaukee.</strong> All rights reserved.
+			<strong> Copyright (c) 2018 </strong> All rights reserved.
 		</footer>
 	</div>
 

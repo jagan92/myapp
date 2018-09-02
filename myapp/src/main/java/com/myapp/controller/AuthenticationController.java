@@ -6,7 +6,12 @@ import com.myapp.dto.UserVO;
 import com.myapp.entity.User;
 import com.myapp.logging.LogManager;
 import com.myapp.logging.Logger;
+import com.myapp.service.UserService;
 
+import java.security.Principal;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +32,11 @@ public class AuthenticationController {
 
 	@Autowired
 	HttpSession httpSession;
+	
+	@Autowired
+	UserService userService;
 
-	@RequestMapping(value = "login.jsp", method = RequestMethod.GET)
+	@RequestMapping(value = "login.htm", method = RequestMethod.GET)
 	public String login(@RequestParam(required = false) String error, ModelMap model,
 			RedirectAttributes redirectAttrs) {
 		if (error != null) {
@@ -39,7 +47,7 @@ public class AuthenticationController {
 		return "auth/login";
 	}
 	
-	@RequestMapping(value = "register.jsp", method = RequestMethod.GET)
+	@RequestMapping(value = "register.htm", method = RequestMethod.GET)
 	public String register(@RequestParam(required = false) String error, ModelMap model,
 			RedirectAttributes redirectAttrs) {
 		UserVO userVO = new UserVO();
@@ -47,12 +55,11 @@ public class AuthenticationController {
 		return "auth/register";
 	}
 	
-	@RequestMapping(value = "register.jsp", method = RequestMethod.POST)
+	@RequestMapping(value = "register.htm", method = RequestMethod.POST)
 	public String register_post(@ModelAttribute UserVO userVO,
 			RedirectAttributes redirectAttrs) {
-		
+		userService.saveUser(userVO);
 		return "redirect:login.htm";
 	}
-	
 
 }

@@ -2,7 +2,7 @@
 <!-- BEGIN LOGIN -->
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Techwaukee</b>  EMS</a>
+    <a href="../../index2.html">My Application</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -10,7 +10,7 @@
 
     <form action="j_spring_security_check" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" name="j_username" placeholder="Email">
+        <input type="text" class="form-control" name="j_username" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -33,8 +33,8 @@
       </div>
     </form>
 
-    <a href="#">I forgot my password</a><br>
-    <a href="auth/register.htm" class="text-center">Register a new membership</a>
+<!--     <a href="#">I forgot my password</a><br> -->
+<!--     <a href="auth/register.htm" class="text-center">Register a new membership</a> -->
 
   </div>
   <!-- /.login-box-body -->

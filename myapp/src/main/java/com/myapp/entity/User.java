@@ -21,19 +21,19 @@ public class User extends BaseSoftDeletable {
 	@Column(name = "user_name", length = 80, nullable = false, unique = true)
 	private String loginId;
 
-	@Column(name = "email", length = 80, nullable = false)
+	@Column(name = "email", length = 80)
 	private String emailId;
 	
 	@Column(name = "password", length = 80)
 	private String password;
 
-	@Column(name = "name", length = 40)
+	@Column(name = "first_name", length = 40)
 	private String firstName;
 
 	@Column(name = "last_name", length = 40)
 	private String lastName;
 
-	@Column(name = "active", length = 40)
+	@Column(name = "is_active", length = 40)
 	private int active;
 
 	@Column(name = "role", length = 40)

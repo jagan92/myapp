@@ -17,7 +17,7 @@
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <form:input type="email" class="form-control" path="loginId" placeholder="Email"/>
+        <form:input type="text" class="form-control" path="loginId" placeholder="Email"/>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">

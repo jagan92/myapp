@@ -7,8 +7,24 @@
 		<put-attribute name="body" value="/WEB-INF/views/auth/login.jsp" />
 	</definition>
 	
+	<definition name="auth/register" extends="authTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/auth/register-user.jsp" />
+	</definition>
+	
 	<definition name="dashboard" extends="dashboardTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/dashboard.jsp" />
+	</definition>
+
+	<definition name="adduser" extends="dashboardTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/create/add-user.jsp" />
+	</definition>
+	
+	<definition name="adddepartment" extends="dashboardTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/create/add-department.jsp" />
+	</definition>
+
+	<definition name="addcourse" extends="dashboardTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/create/add-course.jsp" />
 	</definition>
 
 </tiles-definitions>

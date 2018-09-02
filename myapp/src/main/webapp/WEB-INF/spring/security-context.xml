@@ -10,10 +10,10 @@
 	<http auto-config='true' use-expressions="true">
 	 	<intercept-url pattern="/**/*" access="isAuthenticated()" />
 		<anonymous enabled="false" />
- 		<form-login login-page="/auth/login.jsp" authentication-failure-url="/auth/login.jsp?error=1" always-use-default-target="true"  default-target-url="/dashboard.jsp" />
-		<access-denied-handler error-page="/error/403.jsp" />
+ 		<form-login login-page="/auth/login.htm" authentication-failure-url="/auth/login.htm?error=1" always-use-default-target="true"  default-target-url="/dashboard.htm" />
+		<access-denied-handler error-page="/error/403.htm" />
 		<logout invalidate-session="true" delete-cookies="JSESSIONID" />
-		<session-management invalid-session-url="/error/timeout.jsp" session-fixation-protection="migrateSession">
+		<session-management invalid-session-url="/error/timeout.htm" session-fixation-protection="migrateSession">
 			<concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
 		 </session-management>
 		<remember-me data-source-ref="dataSource" token-validity-seconds="28800" />
