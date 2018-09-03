@@ -17,6 +17,7 @@
 	            <div class="box-header with-border">
 	              <h3 class="box-title">User Details</h3>
 	            </div>
+             <form:form action="auth/register.htm" method="post" modelAttribute="userVO">
 	            <div class="box-body">
 	              <div class="row">
 	                <div class="col-xs-4">
@@ -32,13 +33,13 @@
 	                <div class="col-xs-4">
 	                   <div class="form-group">
 		                  <label>First Name</label>
-		                  <input type="text" class="form-control" placeholder="Enter ...">
+							<form:input type="text" class="form-control" path="firstName" placeholder="Full name"/>
 		                </div>
 	                </div>
 	                <div class="col-xs-4">
 	                   <div class="form-group">
 		                  <label>Last Name</label>
-		                  <input type="text" class="form-control" placeholder="Enter ...">
+							<form:input type="text" class="form-control" path="lastName" placeholder="Full name"/>		
 		                </div>
 	                </div>
 	              </div>
@@ -94,8 +95,9 @@
 	            <!-- /.box-body -->
 	            <div class="box-footer">
 	                <button type="button" class="btn btn-default">Cancel</button>
-	                <button type="button" class="btn btn-success">Save</button>
+	                <button type="submit" class="btn btn-success">Save</button>
 	              </div>
+	             </form:form>
 	          </div>
 		</div>
 	</div>

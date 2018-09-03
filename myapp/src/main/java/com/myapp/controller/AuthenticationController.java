@@ -56,8 +56,7 @@ public class AuthenticationController {
 	}
 	
 	@RequestMapping(value = "register.htm", method = RequestMethod.POST)
-	public String register_post(@ModelAttribute UserVO userVO,
-			RedirectAttributes redirectAttrs) {
+	public String register_post(@ModelAttribute UserVO userVO, RedirectAttributes redirectAttrs) {
 		userService.saveUser(userVO);
 		return "redirect:login.htm";
 	}

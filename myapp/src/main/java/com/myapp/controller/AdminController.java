@@ -1,8 +1,10 @@
 package com.myapp.controller;
 
+import com.myapp.service.AdminService;
 import com.myapp.service.UserService;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,12 +13,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myapp.auditor.AuditorAwareService;
 import com.myapp.constants.AppConstants;
+import com.myapp.dto.MasterDetailVO;
 import com.myapp.dto.UserPreferences;
+import com.myapp.dto.UserVO;
 
 @Controller
 public class AdminController {
@@ -26,6 +32,9 @@ public class AdminController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AdminService adminService;
 
 	@Autowired
 	private UserPreferences pref;
@@ -48,12 +57,31 @@ public class AdminController {
 	
 	@RequestMapping(value = "/addDepartment.htm", method = RequestMethod.GET)
 	public String adddepartment(HttpSession session, ModelMap model) {
+		MasterDetailVO masterDetailVO = new MasterDetailVO("department");
+		model.addAttribute("masterDetailVO", masterDetailVO);
 		return "adddepartment";
+	}
+	
+	@RequestMapping(value = "/saveDepartment.htm", method = RequestMethod.POST)
+	public String savedepartment(@ModelAttribute MasterDetailVO masterDetailVO, RedirectAttributes redirectAttrs) {
+		adminService.saveMasterDetail(masterDetailVO);
+		return "redirect:/addDepartment.htm";
 	}
 	
 	@RequestMapping(value = "/addCourse.htm", method = RequestMethod.GET)
 	public String addcourse(HttpSession session, ModelMap model) {
+		MasterDetailVO masterDetailVO = new MasterDetailVO("course");
+		model.addAttribute("masterDetailVO", masterDetailVO);
+		List<MasterDetailVO> departments = adminService.listMasterDetailVOByType("department");
+		model.addAttribute("departments", departments);
 		return "addcourse";
 	}
+	
+	@RequestMapping(value = "/saveCourse.htm", method = RequestMethod.POST)
+	public String saveCourse(@ModelAttribute MasterDetailVO masterDetailVO, RedirectAttributes redirectAttrs) {
+		adminService.saveMasterDetail(masterDetailVO);
+		return "redirect:/addCourse.htm";
+	}
+	
 
 }
