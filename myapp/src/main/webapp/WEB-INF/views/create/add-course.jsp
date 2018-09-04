@@ -31,7 +31,6 @@
 								<div class="form-group">
 									<label>Department</label> 
 									<form:select class="form-control" path="parentId">
-									<option value="1">asdasd</option>
 										<c:forEach items="${departments}" var="dep">
 											<option value="${dep.id}">${dep.name}</option>
 										</c:forEach>

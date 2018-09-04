@@ -17,13 +17,21 @@ public class UserVO extends BaseVO {
 	private String password;
 	private String role = "admin";
 	private String emailId = "test";
+	private StudentDetailVO studentDetailVO;
 
 	public UserVO() {
-
+		this.studentDetailVO = new StudentDetailVO();
 	}
 
 	public UserVO(User user) {
 		BeanUtils.copyProperties(user, this);
+		this.setId(user.getId());
+	}
+	
+	public UserVO(User user, boolean isReq) {
+		this.setFirstName(user.getFirstName());
+		this.setLastName(user.getLastName());
+		this.setRole(user.getRole());
 		this.setId(user.getId());
 	}
 
@@ -91,5 +99,15 @@ public class UserVO extends BaseVO {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	public StudentDetailVO getStudentDetailVO() {
+		return studentDetailVO;
+	}
+
+	public void setStudentDetailVO(StudentDetailVO studentDetailVO) {
+		this.studentDetailVO = studentDetailVO;
+	}
+	
+	
 
 }

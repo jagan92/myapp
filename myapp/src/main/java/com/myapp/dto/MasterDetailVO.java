@@ -24,9 +24,11 @@ public class MasterDetailVO extends BaseVO {
 	}
 
 	public MasterDetailVO(MasterDetails masterDetails) {
-		BeanUtils.copyProperties(masterDetails, this);
+		//BeanUtils.copyProperties(masterDetails, this);
+		this.setName(masterDetails.getName());
+		this.setMasterType(masterDetails.getMasterType());
 		this.setId(masterDetails.getId());
-		this.setEncryptedId(masterDetails.getEncryptedId());
+		//this.setEncryptedId(masterDetails.getEncryptedId());
 	}
 
 	/********************** HashCode, and equals methods **********************/

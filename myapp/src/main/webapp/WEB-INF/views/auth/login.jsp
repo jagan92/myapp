@@ -2,7 +2,9 @@
 <!-- BEGIN LOGIN -->
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html">My Application</a>
+    <a href="auth/login.htm">
+    	<img alt="" src="resources/app/logo.jpg">
+    </a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

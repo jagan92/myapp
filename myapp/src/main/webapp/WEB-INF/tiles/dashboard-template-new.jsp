@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>:: My Application ::</title>
+<title>:: DACE ::</title>
 <base
 	href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
 <!-- Tell the browser to be responsive to screen width -->
@@ -40,7 +40,9 @@
 			<nav class="navbar navbar-static-top">
 				<div class="container">
 					<div class="navbar-header">
-						<a href="dashboard.htm" class="navbar-brand"><b>My Application</b></a>
+						<a href="dashboard.htm" class="navbar-brand">
+							<img alt="" src="resources/app/clg.jpg">
+						</a>
 						<button type="button" class="navbar-toggle collapsed"
 							data-toggle="collapse" data-target="#navbar-collapse">
 							<i class="fa fa-bars"></i>
@@ -56,7 +58,7 @@
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">Create <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="addUser.htm"><i class="fa fa-user"></i> User</a></li>
+									<li><a href="allusers.htm"><i class="fa fa-user"></i> User</a></li>
 									<li class="divider"></li>
 									<li><a href="addDepartment.htm"><i class="fa fa-cog"></i> Department</a></li>
 									<li class="divider"></li>

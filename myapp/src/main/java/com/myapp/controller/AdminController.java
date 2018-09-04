@@ -4,6 +4,7 @@ import com.myapp.service.AdminService;
 import com.myapp.service.UserService;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,9 +51,28 @@ public class AdminController {
 		return "dashboard";
 	}
 	
+	@RequestMapping(value = "/allusers.htm", method = RequestMethod.GET)
+	public String allusers(HttpSession session, ModelMap model) {
+		List<UserVO> userVOs = userService.allUsers();
+		model.addAttribute("userVOs", userVOs);
+		return "allusers";
+	}
+	
 	@RequestMapping(value = "/addUser.htm", method = RequestMethod.GET)
 	public String adduser(HttpSession session, ModelMap model) {
+		UserVO userVO = new UserVO();
+		model.addAttribute("userVO", userVO);
+		List<MasterDetailVO> departments = adminService.listMasterDetailVOByType("department");
+		model.addAttribute("departments", departments);
+		List<MasterDetailVO> courses = adminService.listMasterDetailVOByType("course");
+		model.addAttribute("courses", courses);
 		return "adduser";
+	}
+	
+	@RequestMapping(value = "/saveUser.htm", method = RequestMethod.POST)
+	public String saveuser(@ModelAttribute UserVO userVO, RedirectAttributes redirectAttrs) {
+		userService.saveUser(userVO);
+		return "redirect:/allusers.htm";
 	}
 	
 	@RequestMapping(value = "/addDepartment.htm", method = RequestMethod.GET)

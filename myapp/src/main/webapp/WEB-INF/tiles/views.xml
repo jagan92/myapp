@@ -26,5 +26,10 @@
 	<definition name="addcourse" extends="dashboardTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/create/add-course.jsp" />
 	</definition>
+	
+	<definition name="allusers" extends="dashboardTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/create/list-users.jsp" />
+	</definition>
+	
 
 </tiles-definitions>
