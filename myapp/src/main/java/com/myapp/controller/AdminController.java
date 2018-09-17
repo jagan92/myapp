@@ -21,7 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myapp.auditor.AuditorAwareService;
 import com.myapp.constants.AppConstants;
+import com.myapp.dto.AbsentDetailVO;
 import com.myapp.dto.MasterDetailVO;
+import com.myapp.dto.StudentDetailVO;
 import com.myapp.dto.UserPreferences;
 import com.myapp.dto.UserVO;
 
@@ -66,6 +68,10 @@ public class AdminController {
 		model.addAttribute("departments", departments);
 		List<MasterDetailVO> courses = adminService.listMasterDetailVOByType("course");
 		model.addAttribute("courses", courses);
+		List<MasterDetailVO> periods = adminService.listMasterDetailVOByType("period");
+		model.addAttribute("periods", periods);
+		List<MasterDetailVO> sections = adminService.listMasterDetailVOByType("section");
+		model.addAttribute("sections", sections);
 		return "adduser";
 	}
 	
@@ -103,5 +109,44 @@ public class AdminController {
 		return "redirect:/addCourse.htm";
 	}
 	
-
+	@RequestMapping(value = "/attendance.htm", method = RequestMethod.GET)
+	public String attendace(HttpSession session, ModelMap model) {
+		StudentDetailVO studentDetailVO = new StudentDetailVO();
+		model.addAttribute("studentDetailVO", studentDetailVO);
+		
+		List<MasterDetailVO> departments = adminService.listMasterDetailVOByType("department");
+		model.addAttribute("departments", departments);
+		List<MasterDetailVO> courses = adminService.listMasterDetailVOByType("course");
+		model.addAttribute("courses", courses);
+		List<MasterDetailVO> periods = adminService.listMasterDetailVOByType("period");
+		model.addAttribute("periods", periods);
+		List<MasterDetailVO> sections = adminService.listMasterDetailVOByType("section");
+		model.addAttribute("sections", sections);
+		
+		model.addAttribute("pagetype", 1);
+		return "attendance";
+	}
+	
+	@RequestMapping(value = "/addattendance.htm", method = RequestMethod.POST)
+	public String addattendace(@ModelAttribute StudentDetailVO studentDetailVO, HttpSession session, ModelMap model) {
+		List<MasterDetailVO> departments = adminService.listMasterDetailVOByType("department");
+		model.addAttribute("departments", departments);
+		List<MasterDetailVO> courses = adminService.listMasterDetailVOByType("course");
+		model.addAttribute("courses", courses);
+		List<MasterDetailVO> periods = adminService.listMasterDetailVOByType("period");
+		model.addAttribute("periods", periods);
+		List<MasterDetailVO> sections = adminService.listMasterDetailVOByType("section");
+		model.addAttribute("sections", sections);
+		
+		List<AbsentDetailVO> absentDetailVOs = adminService.listUsersForAttendance(studentDetailVO);
+		model.addAttribute("absentDetailVOs", absentDetailVOs);
+		model.addAttribute("pagetype", 2);
+		return "addattendance";
+	}
+	
+	@RequestMapping(value = "/saveattendance.htm", method = RequestMethod.POST)
+	public String saveattendace(@ModelAttribute List<AbsentDetailVO> absentDetailVOs, HttpSession session, ModelMap model) {
+		model.addAttribute("pagetype", 2);
+		return "addattendance";
+	}
 }
