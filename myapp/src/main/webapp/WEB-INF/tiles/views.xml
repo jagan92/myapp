@@ -31,5 +31,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/create/list-users.jsp" />
 	</definition>
 	
-
+	<definition name="attendance" extends="dashboardTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/attendance.jsp" />
+	</definition>
+	
+	<definition name="addattendance" extends="dashboardTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/attendance.jsp" />
+	</definition>
 </tiles-definitions>

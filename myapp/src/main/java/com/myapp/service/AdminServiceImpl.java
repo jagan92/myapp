@@ -3,13 +3,22 @@ package com.myapp.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.auth.login.AppConfigurationEntry;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myapp.constants.AppConstants;
+import com.myapp.dto.AbsentDetailVO;
 import com.myapp.dto.MasterDetailVO;
+import com.myapp.dto.StudentDetailVO;
+import com.myapp.dto.UserVO;
 import com.myapp.entity.MasterDetails;
+import com.myapp.entity.StudentDetails;
+import com.myapp.entity.User;
 import com.myapp.repository.MasterDetailRepository;
+import com.myapp.repository.StudentDetailRepository;
 import com.myapp.repository.UserRepository;
 
 @Service("adminService")
@@ -20,6 +29,10 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	private MasterDetailRepository masterDetailRepository;
+	
+	@Autowired
+	private StudentDetailRepository studentDetailRepository;
+	
 
 	@Override
 	public boolean saveMasterDetail(MasterDetailVO masterDetailVO) {
@@ -60,6 +73,30 @@ public class AdminServiceImpl implements AdminService{
 			masterDetailVOs = new ArrayList<>();
 		}
 		return masterDetailVOs;
+	}
+	
+	@Override
+	public List<AbsentDetailVO> listUsersForAttendance(StudentDetailVO studentDetailVO){
+		List<AbsentDetailVO> absentDetailVOs = new ArrayList<>();
+		try {
+			List<StudentDetails> studentDetails = studentDetailRepository.getStudentsByFilter(AppConstants.NO, studentDetailVO.getDepartmentId(), studentDetailVO.getCourseId(), 
+					studentDetailVO.getCoursePeriod(), studentDetailVO.getCourseSection());
+			for(StudentDetails studentDetail : studentDetails) {
+				AbsentDetailVO absentDetailVO = new AbsentDetailVO();
+				User user = userRepository.findOne(studentDetail.getUserId());
+				UserVO userVO = new UserVO(user, true);
+				absentDetailVO.setUserVO(userVO);
+				absentDetailVO.setUserId(studentDetail.getUserId());
+				absentDetailVO.setAbsent(false);
+				absentDetailVOs.add(absentDetailVO);
+			}
+			
+		} catch(Exception er) {
+			System.out.println(er);
+			absentDetailVOs = new ArrayList<>();
+		}
+		return absentDetailVOs;
+		
 	}
 	
 	

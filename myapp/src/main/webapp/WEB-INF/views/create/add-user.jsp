@@ -65,12 +65,11 @@
 							</div>
 							<div class="col-xs-4">
 								<div class="form-group">
-									<label>Section</label> 
+									<label>Period</label> 
 									<form:select class="form-control" path="studentDetailVO.coursePeriod">
-										<option value="1">1st Year</option>
-										<option value="2">2nd Year</option>
-										<option value="3">3rd Year</option>
-										<option value="4">4th Year</option>
+										<c:forEach items="${periods}" var="pd">
+											<option value="${pd.id}">${pd.name}</option>
+										</c:forEach>
 									</form:select>
 								</div>
 							</div>
@@ -78,9 +77,9 @@
 								<div class="form-group">
 									<label>Section</label> 
 									<form:select class="form-control" path="studentDetailVO.courseSection">
-										<option value="1">A</option>
-										<option value="2">B</option>
-										<option value="3">C</option>
+										<c:forEach items="${sections}" var="sc">
+											<option value="${sc.id}">${sc.name}</option>
+										</c:forEach>
 									</form:select>
 								</div>
 							</div>
