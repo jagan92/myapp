@@ -4,7 +4,9 @@ import com.myapp.service.AdminService;
 import com.myapp.service.UserService;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,16 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myapp.auditor.AuditorAwareService;
 import com.myapp.constants.AppConstants;
 import com.myapp.dto.AbsentDetailVO;
+import com.myapp.dto.AttendanceVO;
 import com.myapp.dto.MasterDetailVO;
 import com.myapp.dto.StudentDetailVO;
 import com.myapp.dto.UserPreferences;
@@ -138,15 +144,45 @@ public class AdminController {
 		List<MasterDetailVO> sections = adminService.listMasterDetailVOByType("section");
 		model.addAttribute("sections", sections);
 		
-		List<AbsentDetailVO> absentDetailVOs = adminService.listUsersForAttendance(studentDetailVO);
-		model.addAttribute("absentDetailVOs", absentDetailVOs);
-		model.addAttribute("pagetype", 2);
-		return "addattendance";
+//		List<AbsentDetailVO> absentDetailVOs = adminService.listUsersForAttendance(studentDetailVO);
+//		AttendanceVO attendanceVO = new AttendanceVO(absentDetailVOs);
+//		model.addAttribute("attendanceVO", attendanceVO);
+		session.setAttribute("attendanceFilter", studentDetailVO);
+		//model.addAttribute("pagetype", 2);
+		return "redirect:/updateattendance.htm";
 	}
 	
-	@RequestMapping(value = "/saveattendance.htm", method = RequestMethod.POST)
-	public String saveattendace(@ModelAttribute List<AbsentDetailVO> absentDetailVOs, HttpSession session, ModelMap model) {
+	@RequestMapping(value = "/updateattendance.htm", method = RequestMethod.GET)
+	public String attendaceupdate(HttpSession session, ModelMap model) {
+		StudentDetailVO studentDetailVO = (StudentDetailVO)session.getAttribute("attendanceFilter");
+		List<MasterDetailVO> departments = adminService.listMasterDetailVOByType("department");
+		model.addAttribute("departments", departments);
+		List<MasterDetailVO> courses = adminService.listMasterDetailVOByType("course");
+		model.addAttribute("courses", courses);
+		List<MasterDetailVO> periods = adminService.listMasterDetailVOByType("period");
+		model.addAttribute("periods", periods);
+		List<MasterDetailVO> sections = adminService.listMasterDetailVOByType("section");
+		model.addAttribute("sections", sections);
+		
 		model.addAttribute("pagetype", 2);
-		return "addattendance";
+		List<AbsentDetailVO> absentDetailVOs = adminService.listUsersForAttendance(studentDetailVO);
+		AttendanceVO attendanceVO = new AttendanceVO(absentDetailVOs);
+		model.addAttribute("attendanceVO", attendanceVO);
+		model.addAttribute("studentDetailVO", studentDetailVO);
+		model.addAttribute("absentDetailVOs", absentDetailVOs);
+		return "attendance";
 	}
+	
+	
+	@RequestMapping(value = "/saveattendance.htm", method = RequestMethod.POST)
+	public String saveattendace(@ModelAttribute AttendanceVO attendanceVO, HttpSession session, ModelMap model) {
+		model.addAttribute("pagetype", 2);
+		return "redirect:/attendance.htm";
+	}
+	
+	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+	    binder.registerCustomEditor(Date.class, editor);
+	  }
 }

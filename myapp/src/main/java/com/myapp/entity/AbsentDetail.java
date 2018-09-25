@@ -23,12 +23,11 @@ public class AbsentDetail extends BaseSoftDeletable {
 	@Column(name = "user_id")
 	private Long userId;
 
-	@Column(name = "is_absent")
-	private Boolean isAbsent;
+	@Column(name = "status")
+	private String status;
 
 	@Column(name = "absent_date")
 	private Date absentDate;
-	
 
 	/********************** hashcode, and equals methods **********************/
 
@@ -48,7 +47,6 @@ public class AbsentDetail extends BaseSoftDeletable {
 
 	/********************** Getters and Setters **********************/
 
-
 	public Long getUserId() {
 		return userId;
 	}
@@ -57,12 +55,12 @@ public class AbsentDetail extends BaseSoftDeletable {
 		this.userId = userId;
 	}
 
-	public Boolean getIsAbsent() {
-		return isAbsent;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setIsAbsent(Boolean isAbsent) {
-		this.isAbsent = isAbsent;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Date getAbsentDate() {

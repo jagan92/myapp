@@ -12,7 +12,7 @@ public class AbsentDetailVO extends BaseVO {
 	private static final long serialVersionUID = 3812586049729078253L;
 
 	private Long userId;
-	private boolean absent = false;
+	private String status;
 	private Date absentDate;
 	private UserVO userVO;
 
@@ -42,14 +42,6 @@ public class AbsentDetailVO extends BaseVO {
 		this.userId = userId;
 	}
 
-	public boolean isAbsent() {
-		return absent;
-	}
-
-	public void setAbsent(boolean absent) {
-		this.absent = absent;
-	}
-
 	public Date getAbsentDate() {
 		return absentDate;
 	}
@@ -65,5 +57,15 @@ public class AbsentDetailVO extends BaseVO {
 	public void setUserVO(UserVO userVO) {
 		this.userVO = userVO;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 
 }

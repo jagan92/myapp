@@ -8,6 +8,7 @@ import javax.security.auth.login.AppConfigurationEntry;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.myapp.constants.AppConstants;
 import com.myapp.dto.AbsentDetailVO;
@@ -75,9 +76,10 @@ public class AdminServiceImpl implements AdminService{
 		return masterDetailVOs;
 	}
 	
+	@Transactional(readOnly = false)
 	@Override
 	public List<AbsentDetailVO> listUsersForAttendance(StudentDetailVO studentDetailVO){
-		List<AbsentDetailVO> absentDetailVOs = new ArrayList<>();
+		List<AbsentDetailVO> absentDetailVOs = new ArrayList<AbsentDetailVO>();
 		try {
 			List<StudentDetails> studentDetails = studentDetailRepository.getStudentsByFilter(AppConstants.NO, studentDetailVO.getDepartmentId(), studentDetailVO.getCourseId(), 
 					studentDetailVO.getCoursePeriod(), studentDetailVO.getCourseSection());
@@ -87,7 +89,7 @@ public class AdminServiceImpl implements AdminService{
 				UserVO userVO = new UserVO(user, true);
 				absentDetailVO.setUserVO(userVO);
 				absentDetailVO.setUserId(studentDetail.getUserId());
-				absentDetailVO.setAbsent(false);
+				//absentDetailVO.setStatus(AppConstants.STATUS_ABSENT);
 				absentDetailVOs.add(absentDetailVO);
 			}
 			
