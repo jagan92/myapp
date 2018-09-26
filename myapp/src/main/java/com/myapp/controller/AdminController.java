@@ -18,6 +18,8 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -175,14 +177,17 @@ public class AdminController {
 	
 	
 	@RequestMapping(value = "/saveattendance.htm", method = RequestMethod.POST)
-	public String saveattendace(@ModelAttribute AttendanceVO attendanceVO, HttpSession session, ModelMap model) {
+	public String saveattendace(@ModelAttribute AttendanceVO attendanceVO, HttpSession session, ModelMap model, RedirectAttributes redirectAttributes) {
 		model.addAttribute("pagetype", 2);
+		adminService.saveAttendance(attendanceVO);
+		redirectAttributes.addFlashAttribute("message", "Attendance Updated...");
 		return "redirect:/attendance.htm";
 	}
 	
-	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-	    binder.registerCustomEditor(Date.class, editor);
-	  }
+	@InitBinder
+	public void dataBinding(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
 }

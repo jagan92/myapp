@@ -1,4 +1,12 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
+<c:if test="${not empty message }">
+<div class="alert alert-success alert-dismissible">
+   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+   <h4><i class="icon fa fa-check"></i> Alert!</h4>
+   <c:out value="${message}" />
+ </div>
+</c:if>
+
 <section class="content-header">
 	<h1>Attendance</h1>
 	<ol class="breadcrumb">
@@ -82,24 +90,27 @@
 						<div class="box-header with-border">
 							<h3 class="box-title">Students</h3>
 						</div>
-						<form:hidden path="currentDate" value="22-09-2018"/>
 						<div class="box-body">
+							<div>
+								Date: <form:input type="text" id="datepicker" path="currentDate" required=""/> 
+							</div>
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th style="width: 10px">#</th>
+										<th style="width: 10%">#</th>
 										<th>User Name</th>
 										<th>User Type</th>
-										<th style="width: 70px">Action</th>
+										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${attendanceVO.absentDetailVOs}" var="abUser" varStatus="loop">
 										<tr>
-											<td>${loop.index + 1} <form:hidden path="absentDetailVOs[${loop.index}].absentDate" value="22-09-2018"/></td>
+											<td>${loop.index + 1} <form:hidden path="absentDetailVOs[${loop.index}].absentDate" value="09/01/2018"/></td>
 											<td>${abUser.userVO.firstName} <form:hidden path="absentDetailVOs[${loop.index}].userVO.firstName"/> </td>
 											<td>${abUser.userVO.role} <form:hidden path="absentDetailVOs[${loop.index}].userVO.role"/></td>
 											<td>
+												<form:hidden path="absentDetailVOs[${loop.index}].userId" value="${abUser.userVO.id}"/>
 												<form:select class="form-control input-sm" path="absentDetailVOs[${loop.index}].status">
 													<option value="">-- Select One --</option>
 													<option value="absent">Absent</option>

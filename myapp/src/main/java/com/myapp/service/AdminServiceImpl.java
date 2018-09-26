@@ -12,12 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myapp.constants.AppConstants;
 import com.myapp.dto.AbsentDetailVO;
+import com.myapp.dto.AttendanceVO;
 import com.myapp.dto.MasterDetailVO;
 import com.myapp.dto.StudentDetailVO;
 import com.myapp.dto.UserVO;
+import com.myapp.entity.AbsentDetail;
 import com.myapp.entity.MasterDetails;
 import com.myapp.entity.StudentDetails;
 import com.myapp.entity.User;
+import com.myapp.repository.AbsentDetailRepository;
 import com.myapp.repository.MasterDetailRepository;
 import com.myapp.repository.StudentDetailRepository;
 import com.myapp.repository.UserRepository;
@@ -33,6 +36,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	private StudentDetailRepository studentDetailRepository;
+	
+	@Autowired
+	private AbsentDetailRepository absentDetailRepository;
 	
 
 	@Override
@@ -98,6 +104,25 @@ public class AdminServiceImpl implements AdminService{
 			absentDetailVOs = new ArrayList<>();
 		}
 		return absentDetailVOs;
+		
+	}
+	
+	@Override
+	public boolean saveAttendance(AttendanceVO attendanceVO) {
+		try {
+			List<AbsentDetailVO> absentDetailVOs = attendanceVO.getAbsentDetailVOs();
+			for(AbsentDetailVO absentDetailVO : absentDetailVOs) {
+				AbsentDetail absentDetail = new AbsentDetail();
+				absentDetail.setAbsentDate(attendanceVO.getCurrentDate());
+				absentDetail.setUserId(absentDetailVO.getUserId());
+				absentDetail.setStatus(absentDetailVO.getStatus());
+				absentDetailRepository.save(absentDetail);
+			}
+		} catch(Exception er) {
+			System.out.println(er);
+			return false;
+		}
+		return true;
 		
 	}
 	

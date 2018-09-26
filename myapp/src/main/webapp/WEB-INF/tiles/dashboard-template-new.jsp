@@ -1,3 +1,4 @@
+
 <!doctype html>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <html class="no-js" lang="">
@@ -21,6 +22,8 @@
 <!-- Ionicons -->
 <link rel="stylesheet"
 	href="resources/adminlte/bower_components/Ionicons/css/ionicons.min.css">
+	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- jvectormap -->
 <link rel="stylesheet"
 	href="resources/adminlte/bower_components/jvectormap/jquery-jvectormap.css">
@@ -237,10 +240,18 @@
 	<script src="resources/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- FastClick -->
 	<script src="resources/adminlte/bower_components/fastclick/lib/fastclick.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<!-- AdminLTE App -->
 	<script src="resources/adminlte/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="resources/adminlte/dist/js/demo.js"></script>
+	
+	<script>
+	$( function() {
+	    $( "#datepicker" ).datepicker();
+	    $("#datepicker").datepicker( "setDate" , new Date());
+	  } );
+	</script>
 
 </body>
 </html>
