@@ -38,4 +38,12 @@
 	<definition name="addattendance" extends="dashboardTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/attendance.jsp" />
 	</definition>
+	
+	<definition name="reportsearch" extends="dashboardTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/report/reportsearch.jsp" />
+	</definition>
+	
+	<definition name="reportabsent" extends="dashboardTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/report/report.jsp" />
+	</definition>
 </tiles-definitions>

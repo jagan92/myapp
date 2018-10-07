@@ -15,6 +15,7 @@ public class AbsentDetailVO extends BaseVO {
 	private String status;
 	private Date absentDate;
 	private UserVO userVO;
+	private boolean absent = false;
 
 	/********************** HashCode, and equals methods **********************/
 
@@ -65,7 +66,13 @@ public class AbsentDetailVO extends BaseVO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
+
+	public boolean getAbsent() {
+		return absent;
+	}
+
+	public void setAbsent(boolean absent) {
+		this.absent = absent;
+	}
 
 }

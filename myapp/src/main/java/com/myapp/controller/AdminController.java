@@ -184,6 +184,30 @@ public class AdminController {
 		return "redirect:/attendance.htm";
 	}
 	
+	@RequestMapping(value = "/reportsearch.htm", method = RequestMethod.GET)
+	public String getsearchreport(HttpSession session, ModelMap model) {
+		StudentDetailVO studentDetailVO = new StudentDetailVO();
+		model.addAttribute("studentDetailVO", studentDetailVO);
+		
+		List<MasterDetailVO> departments = adminService.listMasterDetailVOByType("department");
+		model.addAttribute("departments", departments);
+		List<MasterDetailVO> courses = adminService.listMasterDetailVOByType("course");
+		model.addAttribute("courses", courses);
+		List<MasterDetailVO> periods = adminService.listMasterDetailVOByType("period");
+		model.addAttribute("periods", periods);
+		List<MasterDetailVO> sections = adminService.listMasterDetailVOByType("section");
+		model.addAttribute("sections", sections);
+		
+		return "reportsearch";
+	}
+	
+	@RequestMapping(value = "/reportabsent.htm", method = RequestMethod.POST)
+	public String postsearchreport(@ModelAttribute StudentDetailVO studentDetailVO, HttpSession session, ModelMap model) {
+		
+		return "reportabsent";
+	}
+	
+	
 	@InitBinder
 	public void dataBinding(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");

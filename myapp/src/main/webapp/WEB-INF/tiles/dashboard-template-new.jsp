@@ -68,6 +68,7 @@
 									<li><a href="addCourse.htm"><i class="fa fa-cogs"></i> Course</a></li>
 								</ul></li>
 								<li><a href="attendance.htm">Attendance</a></li>
+								<li><a href="reportsearch.htm">Report</a></li>
 						</ul>
 <!-- 						<form class="navbar-form navbar-left" role="search"> -->
 <!-- 							<div class="form-group"> -->

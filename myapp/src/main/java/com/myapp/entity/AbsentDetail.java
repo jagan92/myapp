@@ -29,6 +29,9 @@ public class AbsentDetail extends BaseSoftDeletable {
 	@Column(name = "absent_date")
 	private Date absentDate;
 
+	@Column(name = "is_absent")
+	private boolean absent;
+
 	/********************** hashcode, and equals methods **********************/
 
 	@Override
@@ -69,6 +72,14 @@ public class AbsentDetail extends BaseSoftDeletable {
 
 	public void setAbsentDate(Date absentDate) {
 		this.absentDate = absentDate;
+	}
+
+	public boolean getAbsent() {
+		return absent;
+	}
+
+	public void setAbsent(boolean absent) {
+		this.absent = absent;
 	}
 
 }

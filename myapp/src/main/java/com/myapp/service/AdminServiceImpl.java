@@ -2,6 +2,7 @@ package com.myapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.security.auth.login.AppConfigurationEntry;
 
@@ -110,13 +111,19 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public boolean saveAttendance(AttendanceVO attendanceVO) {
 		try {
+			List<AbsentDetail> absentDetails = absentDetailRepository.getAbsentDetailsByDate(AppConstants.NO, attendanceVO.getCurrentDate());
 			List<AbsentDetailVO> absentDetailVOs = attendanceVO.getAbsentDetailVOs();
-			for(AbsentDetailVO absentDetailVO : absentDetailVOs) {
-				AbsentDetail absentDetail = new AbsentDetail();
-				absentDetail.setAbsentDate(attendanceVO.getCurrentDate());
-				absentDetail.setUserId(absentDetailVO.getUserId());
-				absentDetail.setStatus(absentDetailVO.getStatus());
-				absentDetailRepository.save(absentDetail);
+			List<AbsentDetailVO> absentDetailVOTemp  = absentDetailVOs.stream().filter(a -> a.getAbsent()).collect(Collectors.toList());
+			for(AbsentDetailVO absentDetailVO : absentDetailVOTemp) {
+				boolean isAbsen = absentDetails.stream().anyMatch(aa -> aa.getUserId().equals(absentDetailVO.getUserId()));
+				if(!isAbsen) {
+					AbsentDetail absentDetail = new AbsentDetail();
+					absentDetail.setAbsentDate(attendanceVO.getCurrentDate());
+					absentDetail.setUserId(absentDetailVO.getUserId());
+					absentDetail.setStatus(absentDetailVO.getStatus());
+					absentDetail.setAbsent(absentDetailVO.getAbsent());
+					absentDetailRepository.save(absentDetail);
+				}
 			}
 		} catch(Exception er) {
 			System.out.println(er);

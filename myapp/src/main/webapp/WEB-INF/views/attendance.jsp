@@ -111,11 +111,13 @@
 											<td>${abUser.userVO.role} <form:hidden path="absentDetailVOs[${loop.index}].userVO.role"/></td>
 											<td>
 												<form:hidden path="absentDetailVOs[${loop.index}].userId" value="${abUser.userVO.id}"/>
-												<form:select class="form-control input-sm" path="absentDetailVOs[${loop.index}].status">
-													<option value="">-- Select One --</option>
-													<option value="absent">Absent</option>
-													<option value="od">On Duty</option>
-												</form:select>
+												<form:hidden path="absentDetailVOs[${loop.index}].status" value="absent"/>
+<%-- 												<form:select class="form-control input-sm" path="absentDetailVOs[${loop.index}].status"> --%>
+<!-- 													<option value="">-- Select One --</option> -->
+<!-- 													<option value="absent">Absent</option> -->
+<!-- 													<option value="od">On Duty</option> -->
+<%-- 												</form:select> --%>
+												<form:checkbox path="absentDetailVOs[${loop.index}].absent" />
 											</td>
 										</tr>
 									</c:forEach>
