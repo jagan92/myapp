@@ -1,5 +1,7 @@
 package com.myapp.dto;
 
+import java.util.Date;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -14,9 +16,11 @@ public class StudentDetailVO extends BaseVO {
 	private Long courseId;
 	private Long coursePeriod;
 	private Long courseSection;
-	
+	private Date fromDate;
+	private Date toDate;
+
 	public StudentDetailVO() {
-		
+
 	}
 
 	/********************** HashCode, and equals methods **********************/
@@ -34,9 +38,8 @@ public class StudentDetailVO extends BaseVO {
 		MasterDetailVO other = (MasterDetailVO) obj;
 		return new EqualsBuilder().append(this.getId(), other.getId()).isEquals();
 	}
-	
-	/********************** Getters and Setters **********************/
 
+	/********************** Getters and Setters **********************/
 
 	public Long getUserId() {
 		return userId;
@@ -76,6 +79,22 @@ public class StudentDetailVO extends BaseVO {
 
 	public void setCourseSection(Long courseSection) {
 		this.courseSection = courseSection;
-	}	
-	
+	}
+
+	public Date getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public Date getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
+	}
+
 }

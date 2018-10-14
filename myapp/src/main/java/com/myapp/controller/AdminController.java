@@ -30,6 +30,7 @@ import com.myapp.auditor.AuditorAwareService;
 import com.myapp.constants.AppConstants;
 import com.myapp.dto.AbsentDetailVO;
 import com.myapp.dto.AttendanceVO;
+import com.myapp.dto.DateReportVO;
 import com.myapp.dto.MasterDetailVO;
 import com.myapp.dto.StudentDetailVO;
 import com.myapp.dto.UserPreferences;
@@ -43,7 +44,7 @@ public class AdminController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private AdminService adminService;
 
@@ -55,19 +56,19 @@ public class AdminController {
 			HttpServletResponse response) {
 		return "redirect:/dashboard.htm";
 	}
-	
+
 	@RequestMapping(value = "/dashboard.htm", method = RequestMethod.GET)
 	public String dashboard(HttpSession session, ModelMap model) {
 		return "dashboard";
 	}
-	
+
 	@RequestMapping(value = "/allusers.htm", method = RequestMethod.GET)
 	public String allusers(HttpSession session, ModelMap model) {
 		List<UserVO> userVOs = userService.allUsers();
 		model.addAttribute("userVOs", userVOs);
 		return "allusers";
 	}
-	
+
 	@RequestMapping(value = "/addUser.htm", method = RequestMethod.GET)
 	public String adduser(HttpSession session, ModelMap model) {
 		UserVO userVO = new UserVO();
@@ -82,26 +83,26 @@ public class AdminController {
 		model.addAttribute("sections", sections);
 		return "adduser";
 	}
-	
+
 	@RequestMapping(value = "/saveUser.htm", method = RequestMethod.POST)
 	public String saveuser(@ModelAttribute UserVO userVO, RedirectAttributes redirectAttrs) {
 		userService.saveUser(userVO);
 		return "redirect:/allusers.htm";
 	}
-	
+
 	@RequestMapping(value = "/addDepartment.htm", method = RequestMethod.GET)
 	public String adddepartment(HttpSession session, ModelMap model) {
 		MasterDetailVO masterDetailVO = new MasterDetailVO("department");
 		model.addAttribute("masterDetailVO", masterDetailVO);
 		return "adddepartment";
 	}
-	
+
 	@RequestMapping(value = "/saveDepartment.htm", method = RequestMethod.POST)
 	public String savedepartment(@ModelAttribute MasterDetailVO masterDetailVO, RedirectAttributes redirectAttrs) {
 		adminService.saveMasterDetail(masterDetailVO);
 		return "redirect:/addDepartment.htm";
 	}
-	
+
 	@RequestMapping(value = "/addCourse.htm", method = RequestMethod.GET)
 	public String addcourse(HttpSession session, ModelMap model) {
 		MasterDetailVO masterDetailVO = new MasterDetailVO("course");
@@ -110,18 +111,18 @@ public class AdminController {
 		model.addAttribute("departments", departments);
 		return "addcourse";
 	}
-	
+
 	@RequestMapping(value = "/saveCourse.htm", method = RequestMethod.POST)
 	public String saveCourse(@ModelAttribute MasterDetailVO masterDetailVO, RedirectAttributes redirectAttrs) {
 		adminService.saveMasterDetail(masterDetailVO);
 		return "redirect:/addCourse.htm";
 	}
-	
+
 	@RequestMapping(value = "/attendance.htm", method = RequestMethod.GET)
 	public String attendace(HttpSession session, ModelMap model) {
 		StudentDetailVO studentDetailVO = new StudentDetailVO();
 		model.addAttribute("studentDetailVO", studentDetailVO);
-		
+
 		List<MasterDetailVO> departments = adminService.listMasterDetailVOByType("department");
 		model.addAttribute("departments", departments);
 		List<MasterDetailVO> courses = adminService.listMasterDetailVOByType("course");
@@ -130,11 +131,11 @@ public class AdminController {
 		model.addAttribute("periods", periods);
 		List<MasterDetailVO> sections = adminService.listMasterDetailVOByType("section");
 		model.addAttribute("sections", sections);
-		
+
 		model.addAttribute("pagetype", 1);
 		return "attendance";
 	}
-	
+
 	@RequestMapping(value = "/addattendance.htm", method = RequestMethod.POST)
 	public String addattendace(@ModelAttribute StudentDetailVO studentDetailVO, HttpSession session, ModelMap model) {
 		List<MasterDetailVO> departments = adminService.listMasterDetailVOByType("department");
@@ -145,18 +146,18 @@ public class AdminController {
 		model.addAttribute("periods", periods);
 		List<MasterDetailVO> sections = adminService.listMasterDetailVOByType("section");
 		model.addAttribute("sections", sections);
-		
+
 //		List<AbsentDetailVO> absentDetailVOs = adminService.listUsersForAttendance(studentDetailVO);
 //		AttendanceVO attendanceVO = new AttendanceVO(absentDetailVOs);
 //		model.addAttribute("attendanceVO", attendanceVO);
 		session.setAttribute("attendanceFilter", studentDetailVO);
-		//model.addAttribute("pagetype", 2);
+		// model.addAttribute("pagetype", 2);
 		return "redirect:/updateattendance.htm";
 	}
-	
+
 	@RequestMapping(value = "/updateattendance.htm", method = RequestMethod.GET)
 	public String attendaceupdate(HttpSession session, ModelMap model) {
-		StudentDetailVO studentDetailVO = (StudentDetailVO)session.getAttribute("attendanceFilter");
+		StudentDetailVO studentDetailVO = (StudentDetailVO) session.getAttribute("attendanceFilter");
 		List<MasterDetailVO> departments = adminService.listMasterDetailVOByType("department");
 		model.addAttribute("departments", departments);
 		List<MasterDetailVO> courses = adminService.listMasterDetailVOByType("course");
@@ -165,7 +166,7 @@ public class AdminController {
 		model.addAttribute("periods", periods);
 		List<MasterDetailVO> sections = adminService.listMasterDetailVOByType("section");
 		model.addAttribute("sections", sections);
-		
+
 		model.addAttribute("pagetype", 2);
 		List<AbsentDetailVO> absentDetailVOs = adminService.listUsersForAttendance(studentDetailVO);
 		AttendanceVO attendanceVO = new AttendanceVO(absentDetailVOs);
@@ -174,21 +175,21 @@ public class AdminController {
 		model.addAttribute("absentDetailVOs", absentDetailVOs);
 		return "attendance";
 	}
-	
-	
+
 	@RequestMapping(value = "/saveattendance.htm", method = RequestMethod.POST)
-	public String saveattendace(@ModelAttribute AttendanceVO attendanceVO, HttpSession session, ModelMap model, RedirectAttributes redirectAttributes) {
+	public String saveattendace(@ModelAttribute AttendanceVO attendanceVO, HttpSession session, ModelMap model,
+			RedirectAttributes redirectAttributes) {
 		model.addAttribute("pagetype", 2);
 		adminService.saveAttendance(attendanceVO);
 		redirectAttributes.addFlashAttribute("message", "Attendance Updated...");
 		return "redirect:/attendance.htm";
 	}
-	
+
 	@RequestMapping(value = "/reportsearch.htm", method = RequestMethod.GET)
 	public String getsearchreport(HttpSession session, ModelMap model) {
 		StudentDetailVO studentDetailVO = new StudentDetailVO();
 		model.addAttribute("studentDetailVO", studentDetailVO);
-		
+
 		List<MasterDetailVO> departments = adminService.listMasterDetailVOByType("department");
 		model.addAttribute("departments", departments);
 		List<MasterDetailVO> courses = adminService.listMasterDetailVOByType("course");
@@ -197,17 +198,18 @@ public class AdminController {
 		model.addAttribute("periods", periods);
 		List<MasterDetailVO> sections = adminService.listMasterDetailVOByType("section");
 		model.addAttribute("sections", sections);
-		
+
 		return "reportsearch";
 	}
-	
+
 	@RequestMapping(value = "/reportabsent.htm", method = RequestMethod.POST)
-	public String postsearchreport(@ModelAttribute StudentDetailVO studentDetailVO, HttpSession session, ModelMap model) {
-		
+	public String postsearchreport(@ModelAttribute StudentDetailVO studentDetailVO, HttpSession session,
+			ModelMap model) {
+		List<DateReportVO> dateReportVOs = adminService.dateReport(studentDetailVO);
+		model.addAttribute("dateReportVOs", dateReportVOs);
 		return "reportabsent";
 	}
-	
-	
+
 	@InitBinder
 	public void dataBinding(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");

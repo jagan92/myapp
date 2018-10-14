@@ -13,4 +13,7 @@ public interface AbsentDetailRepository extends JpaRepository<AbsentDetail, Long
 	@Query("select d from AbsentDetail d where d.deleted=?1 and d.absentDate=?2")
 	List<AbsentDetail> getAbsentDetailsByDate(char deleted, Date curDate);
 	
+	@Query("select d from AbsentDetail d where d.deleted=?1 and d.absentDate=?2 and d.userId in (?3)")
+	List<AbsentDetail> getAbsentDetailsByUserDate(char deleted, Date curDate, Long[] arrStuId);
+	
 }

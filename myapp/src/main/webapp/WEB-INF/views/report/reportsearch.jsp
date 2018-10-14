@@ -58,6 +58,12 @@
 										</form:select>
 									</div>
 								</div>
+								<div class="col-xs-4">
+									<div class="form-group">
+										<label>Section</label>
+										<form:input class="form-control" type="text" id="datepicker" path="fromDate" required=""/>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="box-footer">

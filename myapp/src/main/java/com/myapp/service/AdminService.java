@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.myapp.dto.AbsentDetailVO;
 import com.myapp.dto.AttendanceVO;
+import com.myapp.dto.DateReportVO;
 import com.myapp.dto.MasterDetailVO;
 import com.myapp.dto.StudentDetailVO;
 import com.myapp.entity.MasterDetails;
@@ -19,5 +20,7 @@ public interface AdminService {
 	public List<AbsentDetailVO> listUsersForAttendance(StudentDetailVO studentDetailVO);
 	
 	public boolean saveAttendance(AttendanceVO attendanceVO);
+	
+	public List<DateReportVO> dateReport(StudentDetailVO studentDetailVO);
 	
 }
