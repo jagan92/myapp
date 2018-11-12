@@ -141,6 +141,14 @@ public class AdminServiceImpl implements AdminService {
 	public List<DateReportVO> dateReport(StudentDetailVO studentDetailVO) {
 		List<DateReportVO> dateReportVOs = new ArrayList<>();
 		try {
+			MasterDetails deptMaster = null;
+			MasterDetails courseMaster = null;
+			MasterDetails periodMaster = null;
+			MasterDetails secMaster = null;
+			deptMaster = (studentDetailVO.getDepartmentId() != null) ? masterDetailRepository.findOne(studentDetailVO.getDepartmentId()) : null;
+			courseMaster = (studentDetailVO.getCourseId() != null) ? masterDetailRepository.findOne(studentDetailVO.getCourseId()) : null;
+			periodMaster = (studentDetailVO.getCoursePeriod() != null) ? masterDetailRepository.findOne(studentDetailVO.getCoursePeriod()) : null;
+			secMaster = (studentDetailVO.getCourseSection() != null) ? masterDetailRepository.findOne(studentDetailVO.getCourseSection()) : null;
 			DateReportVO dateReportVO = new DateReportVO();
 			List<StudentDetails> stuDetails = studentDetailRepository.getStudentsByFilter(AppConstants.NO,
 					studentDetailVO.getDepartmentId(), studentDetailVO.getCourseId(), studentDetailVO.getCoursePeriod(),
@@ -154,6 +162,19 @@ public class AdminServiceImpl implements AdminService {
 			}
 			
 			List<AbsentDetail> absentDetails = absentDetailRepository.getAbsentDetailsByUserDate(AppConstants.NO, studentDetailVO.getFromDate(), arrStuId);
+			Long[] arrUserId = new Long[absentDetails.size()];
+			for(int i = 0; i < absentDetails.size(); i++) {
+				arrUserId[i] = absentDetails.get(i).getUserId();
+			}
+			
+			List<User> users = userRepository.getUserDetails(AppConstants.NO, arrUserId);
+			List<UserVO> userVOs = new ArrayList<>();
+			for(int j = 0; j < users.size(); j++) {
+				StudentDetailVO stuDetailVO = new StudentDetailVO(deptMaster.getName(), courseMaster.getName(), periodMaster.getName(), secMaster.getName());
+				UserVO userVO = new UserVO(users.get(j), true, stuDetailVO);
+				userVOs.add(userVO);
+			}
+			
 			Long totalCount = new Long(stuDetails.size());
 			Long absentCount = new Long(absentDetails.size());
 			Long presentCount = totalCount - absentCount;
@@ -161,6 +182,7 @@ public class AdminServiceImpl implements AdminService {
 			dateReportVO.setPresentCount(presentCount);
 			dateReportVO.setAbsentCount(absentCount);
 			dateReportVO.setAbsentDate(studentDetailVO.getFromDate());
+			dateReportVO.setUserVOs(userVOs);
 			dateReportVOs.add(dateReportVO);
 			
 		} catch (Exception er) {

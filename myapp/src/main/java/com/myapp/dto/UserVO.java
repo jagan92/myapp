@@ -34,6 +34,14 @@ public class UserVO extends BaseVO {
 		this.setRole(user.getRole());
 		this.setId(user.getId());
 	}
+	
+	public UserVO(User user, boolean isReq, StudentDetailVO studentDetailVO) {
+		this.setFirstName(user.getFirstName());
+		this.setLastName(user.getLastName());
+		this.setRole(user.getRole());
+		this.setId(user.getId());
+		this.studentDetailVO = studentDetailVO;
+	}
 
 	/********************** HashCode, and equals methods **********************/
 

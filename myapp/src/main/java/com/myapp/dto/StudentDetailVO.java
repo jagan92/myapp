@@ -19,8 +19,20 @@ public class StudentDetailVO extends BaseVO {
 	private Date fromDate;
 	private Date toDate;
 
+	private String department;
+	private String course;
+	private String period;
+	private String section;
+
 	public StudentDetailVO() {
 
+	}
+	
+	public StudentDetailVO(String department, String course, String period, String section) {
+		this.department = department;
+		this.course = course;
+		this.period = period;
+		this.section = section;
 	}
 
 	/********************** HashCode, and equals methods **********************/
@@ -95,6 +107,38 @@ public class StudentDetailVO extends BaseVO {
 
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getCourse() {
+		return course;
+	}
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
+
+	public String getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(String period) {
+		this.period = period;
+	}
+
+	public String getSection() {
+		return section;
+	}
+
+	public void setSection(String section) {
+		this.section = section;
 	}
 
 }
