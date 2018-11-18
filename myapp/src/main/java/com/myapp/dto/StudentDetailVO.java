@@ -35,8 +35,6 @@ public class StudentDetailVO extends BaseVO {
 		this.section = section;
 	}
 
-	/********************** HashCode, and equals methods **********************/
-
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(this.getId()).hashCode();
@@ -50,8 +48,6 @@ public class StudentDetailVO extends BaseVO {
 		MasterDetailVO other = (MasterDetailVO) obj;
 		return new EqualsBuilder().append(this.getId(), other.getId()).isEquals();
 	}
-
-	/********************** Getters and Setters **********************/
 
 	public Long getUserId() {
 		return userId;
