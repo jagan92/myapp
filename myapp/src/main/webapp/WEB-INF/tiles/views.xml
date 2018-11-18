@@ -46,4 +46,8 @@
 	<definition name="reportabsent" extends="dashboardTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/report/report.jsp" />
 	</definition>
+	
+	<definition name="staffmap" extends="dashboardTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/staff/staffMap.jsp" />
+	</definition>
 </tiles-definitions>

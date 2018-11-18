@@ -7,6 +7,6 @@ import com.myapp.entity.User;
 
 public interface UserService {
 	public User findUserByEmail(String email);
-	public void saveUser(UserVO userVO);
+	public String saveUser(UserVO userVO);
 	public List<UserVO> allUsers();
 }

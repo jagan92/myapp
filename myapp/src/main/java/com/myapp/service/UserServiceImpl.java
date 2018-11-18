@@ -47,7 +47,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void saveUser(UserVO userVO) {
+	public String saveUser(UserVO userVO) {
+		String returnString = "true";
 		try {
 			User user = new User();
 			BeanUtils.copyProperties(user, userVO);
@@ -68,9 +69,10 @@ public class UserServiceImpl implements UserService{
 				staffDetailRepository.save(staffDetail);
 			}
 		}catch(Exception e) {
+			returnString = "false";
 			System.out.println(e);
 		}
-		
+		return returnString;
 	}
 	
 	@Override

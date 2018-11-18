@@ -12,5 +12,6 @@ public final class AppConstants {
 	public static final String ROLE_ADMIN = "admin";
 	public static final String ROLE_STUDENT = "student";
 	public static final String ROLE_STAFF = "staff";
+	public static final String SESSION_ROLE = "session_role";
 
 }

@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myapp.constants.AppConstants;
 import com.myapp.repository.UserRepository;
 
 @Component
@@ -25,6 +26,8 @@ public class AuditorUserDetailsService implements UserDetailsService {
 		com.myapp.entity.User user = userRepository.findByLoginId(loginId);
 		if (user == null) {
 			throw new UsernameNotFoundException("UserName " + loginId + " not found");
+		} else {
+			httpSession.setAttribute(AppConstants.SESSION_ROLE, user.getRole());
 		}
 		return new SecurityUser(user);
 	}

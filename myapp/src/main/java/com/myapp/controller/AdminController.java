@@ -86,7 +86,11 @@ public class AdminController {
 
 	@RequestMapping(value = "/saveUser.htm", method = RequestMethod.POST)
 	public String saveuser(@ModelAttribute UserVO userVO, RedirectAttributes redirectAttrs) {
-		userService.saveUser(userVO);
+		String returnString = userService.saveUser(userVO);
+		String strType = (returnString.equals("true")) ? "success" : "danger";
+		returnString = (returnString.equals("true")) ? "User Added!" : "User Name(Login ID) already exists";
+		redirectAttrs.addFlashAttribute("message", returnString);
+		redirectAttrs.addFlashAttribute("msgtype", strType);
 		return "redirect:/allusers.htm";
 	}
 

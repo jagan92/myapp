@@ -1,4 +1,11 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
+<c:if test="${not empty message && not empty msgtype}">
+	<div class="alert alert-${msgtype} alert-dismissible">
+	   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	   <h4><i class="icon fa fa-check"></i> Alert!</h4>
+	   <c:out value="${message}" />
+	 </div>
+</c:if>
 <section class="content-header">
 	<h1>All User</h1>
 	<ol class="breadcrumb">
@@ -23,6 +30,7 @@
 						<thead>
 							<tr>
 								<th style="width: 10px">#</th>
+								<th>Name</th>
 								<th>User Name</th>
 								<th>User Type</th>
 								<th style="width: 40px">Action</th>
@@ -32,7 +40,8 @@
 							<c:forEach items="${userVOs}" var="user" varStatus="loop">
 								<tr>
 									<td>${loop.index + 1}</td>
-									<td>${user.firstName}</td>
+									<td>${user.firstName} ${user.lastName}</td>
+									<td>${user.loginId}</td>
 									<td>${user.role}</td>
 									<td></td>
 								</tr>
@@ -45,3 +54,6 @@
 		</div>
 	</div>
 </section>
+<script>
+	alert("${sessionRole}");
+</script>

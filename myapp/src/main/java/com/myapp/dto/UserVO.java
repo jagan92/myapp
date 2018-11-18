@@ -32,6 +32,7 @@ public class UserVO extends BaseVO {
 	public UserVO(User user, boolean isReq) {
 		this.setFirstName(user.getFirstName());
 		this.setLastName(user.getLastName());
+		this.setLoginId(user.getLoginId());
 		this.setRole(user.getRole());
 		this.setId(user.getId());
 	}

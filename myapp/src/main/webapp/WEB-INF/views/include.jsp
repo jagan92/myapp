@@ -9,3 +9,6 @@
 <%@ page import="com.myapp.constants.AppConstants"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ page session="true"%>
+
+
+<c:set var="sessionRole" value="<%= session.getAttribute(AppConstants.SESSION_ROLE) %>" />
