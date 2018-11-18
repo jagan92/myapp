@@ -60,7 +60,7 @@
 								</div>
 								<div class="col-xs-4">
 									<div class="form-group">
-										<label>Section</label>
+										<label>Date</label>
 										<form:input class="form-control" type="text" id="datepicker" path="fromDate" required=""/>
 									</div>
 								</div>

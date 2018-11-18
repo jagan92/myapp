@@ -8,5 +8,9 @@ public final class AppConstants {
 	
 	public static final String STATUS_ABSENT = "absent";
 	public static final String STATUS_OD = "od";
+	
+	public static final String ROLE_ADMIN = "admin";
+	public static final String ROLE_STUDENT = "student";
+	public static final String ROLE_STAFF = "staff";
 
 }

@@ -17,8 +17,6 @@ public class AbsentDetailVO extends BaseVO {
 	private UserVO userVO;
 	private boolean absent = false;
 
-	/********************** HashCode, and equals methods **********************/
-
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(this.getId()).hashCode();
@@ -32,8 +30,6 @@ public class AbsentDetailVO extends BaseVO {
 		AbsentDetailVO other = (AbsentDetailVO) obj;
 		return new EqualsBuilder().append(this.getId(), other.getId()).isEquals();
 	}
-
-	/********************** Getters and Setters **********************/
 
 	public Long getUserId() {
 		return userId;

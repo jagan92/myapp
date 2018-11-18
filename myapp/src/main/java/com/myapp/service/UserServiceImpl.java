@@ -11,10 +11,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myapp.constants.AppConstants;
+import com.myapp.dto.StaffDetailVO;
 import com.myapp.dto.StudentDetailVO;
 import com.myapp.dto.UserVO;
+import com.myapp.entity.StaffDetail;
 import com.myapp.entity.StudentDetails;
 import com.myapp.entity.User;
+import com.myapp.repository.StaffDetailRepository;
+import com.myapp.repository.StaffMaintanenceRepository;
 import com.myapp.repository.StudentDetailRepository;
 import com.myapp.repository.UserRepository;
 
@@ -26,6 +31,12 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private StudentDetailRepository studentDetailRepository;
+	
+	@Autowired
+	private StaffDetailRepository staffDetailRepository;
+	
+	@Autowired
+	private StaffMaintanenceRepository staffMaintanenceRepository;
 	
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -43,12 +54,18 @@ public class UserServiceImpl implements UserService{
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 	        user.setActive(1);
 			User saveUser = userRepository.save(user);
-			if(saveUser != null && saveUser.getId() != null) {
+			if(saveUser != null && saveUser.getId() != null && saveUser.getRole().equalsIgnoreCase(AppConstants.ROLE_STUDENT)) {
 				StudentDetails studentDetails = new StudentDetails();
 				StudentDetailVO stuDetVO = userVO.getStudentDetailVO();
 				stuDetVO.setUserId(saveUser.getId());
 				BeanUtils.copyProperties(studentDetails, stuDetVO);
 				studentDetailRepository.save(studentDetails);
+			} else if(saveUser != null && saveUser.getId() != null && saveUser.getRole().equalsIgnoreCase(AppConstants.ROLE_STAFF)) {
+				StaffDetail staffDetail = new StaffDetail();
+				StaffDetailVO staffDetailVO = userVO.getStaffDetailVO();
+				staffDetailVO.setUserId(saveUser.getId());
+				BeanUtils.copyProperties(staffDetail, staffDetailVO);
+				staffDetailRepository.save(staffDetail);
 			}
 		}catch(Exception e) {
 			System.out.println(e);

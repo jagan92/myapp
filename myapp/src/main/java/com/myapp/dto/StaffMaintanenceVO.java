@@ -1,38 +1,30 @@
-package com.myapp.entity;
+package com.myapp.dto;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.util.Date;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import com.myapp.entity.base.BaseSoftDeletable;
+import com.myapp.dto.base.BaseVO;
 
-@Entity
-@Table(name = "student_details")
-@AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "student_detail_id")) })
-public class StudentDetails extends BaseSoftDeletable {
+public class StaffMaintanenceVO extends BaseVO {
 
-	private static final long serialVersionUID = -5485347851769144137L;
-	
-	@Column(name = "user_id")
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6562320343775195530L;
+
 	private Long userId;
-	
-	@Column(name = "department_id")
 	private Long departmentId;
-	
-	@Column(name = "course_id")
 	private Long courseId;
-	
-	@Column(name = "course_period")
 	private Long coursePeriod;
-	
-	@Column(name = "course_section")
 	private Long courseSection;
-	
+
+	private String department;
+	private String course;
+	private String period;
+	private String section;
+
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(this.getId()).hashCode();
@@ -43,10 +35,9 @@ public class StudentDetails extends BaseSoftDeletable {
 		if (obj == null || obj.getClass() != getClass()) {
 			return false;
 		}
-		StudentDetails other = (StudentDetails) obj;
+		StaffMaintanenceVO other = (StaffMaintanenceVO) obj;
 		return new EqualsBuilder().append(this.getId(), other.getId()).isEquals();
 	}
-
 
 	public Long getUserId() {
 		return userId;
@@ -87,6 +78,37 @@ public class StudentDetails extends BaseSoftDeletable {
 	public void setCourseSection(Long courseSection) {
 		this.courseSection = courseSection;
 	}
-	
-	
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getCourse() {
+		return course;
+	}
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
+
+	public String getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(String period) {
+		this.period = period;
+	}
+
+	public String getSection() {
+		return section;
+	}
+
+	public void setSection(String section) {
+		this.section = section;
+	}
+
 }

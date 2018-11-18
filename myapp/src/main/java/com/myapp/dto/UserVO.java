@@ -18,6 +18,7 @@ public class UserVO extends BaseVO {
 	private String role = "admin";
 	private String emailId = "test";
 	private StudentDetailVO studentDetailVO;
+	private StaffDetailVO staffDetailVO;
 
 	public UserVO() {
 		this.studentDetailVO = new StudentDetailVO();
@@ -27,12 +28,28 @@ public class UserVO extends BaseVO {
 		BeanUtils.copyProperties(user, this);
 		this.setId(user.getId());
 	}
-	
+
 	public UserVO(User user, boolean isReq) {
 		this.setFirstName(user.getFirstName());
 		this.setLastName(user.getLastName());
 		this.setRole(user.getRole());
 		this.setId(user.getId());
+	}
+
+	public UserVO(User user, boolean isReq, StudentDetailVO studentDetailVO) {
+		this.setFirstName(user.getFirstName());
+		this.setLastName(user.getLastName());
+		this.setRole(user.getRole());
+		this.setId(user.getId());
+		this.studentDetailVO = studentDetailVO;
+	}
+	
+	public UserVO(User user, boolean isReq, StaffDetailVO staffDetailVO) {
+		this.setFirstName(user.getFirstName());
+		this.setLastName(user.getLastName());
+		this.setRole(user.getRole());
+		this.setId(user.getId());
+		this.staffDetailVO = staffDetailVO;
 	}
 
 	/********************** HashCode, and equals methods **********************/
@@ -107,7 +124,13 @@ public class UserVO extends BaseVO {
 	public void setStudentDetailVO(StudentDetailVO studentDetailVO) {
 		this.studentDetailVO = studentDetailVO;
 	}
-	
-	
+
+	public StaffDetailVO getStaffDetailVO() {
+		return staffDetailVO;
+	}
+
+	public void setStaffDetailVO(StaffDetailVO staffDetailVO) {
+		this.staffDetailVO = staffDetailVO;
+	}
 
 }

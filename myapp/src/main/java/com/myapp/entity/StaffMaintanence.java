@@ -12,12 +12,13 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import com.myapp.entity.base.BaseSoftDeletable;
 
 @Entity
-@Table(name = "student_details")
-@AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "student_detail_id")) })
-public class StudentDetails extends BaseSoftDeletable {
+@Table(name = "staff_maintanences")
+@AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "staff_maintanence_id")) })
+public class StaffMaintanence extends BaseSoftDeletable{
 
-	private static final long serialVersionUID = -5485347851769144137L;
 	
+	private static final long serialVersionUID = -4810205226225181535L;
+
 	@Column(name = "user_id")
 	private Long userId;
 	
@@ -43,7 +44,7 @@ public class StudentDetails extends BaseSoftDeletable {
 		if (obj == null || obj.getClass() != getClass()) {
 			return false;
 		}
-		StudentDetails other = (StudentDetails) obj;
+		StaffMaintanence other = (StaffMaintanence) obj;
 		return new EqualsBuilder().append(this.getId(), other.getId()).isEquals();
 	}
 
@@ -88,5 +89,6 @@ public class StudentDetails extends BaseSoftDeletable {
 		this.courseSection = courseSection;
 	}
 	
+
 	
 }
